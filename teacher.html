@@ -1,63 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teacher Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teacher Dashboard | Nkuene Girls</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
+
+
 <body>
-  <header>
-    <h1>👩‍🏫 Teacher Dashboard</h1>
-    <a href="index.html">← Student Page</a>
-  </header>
 
-  <!-- PASSWORD GATE -->
-  <div id="loginBox" class="card narrow">
-    <h2>Enter teacher password</h2>
-    <input type="password" id="pwd" placeholder="Password">
-    <button onclick="checkPassword()">Login</button>
-    <p id="pwdMsg" class="error"></p>
-  </div>
 
-  <main id="dashboard" style="display:none">
-    <!-- UPLOAD ASSIGNMENT -->
-    <section class="card">
-      <h2>📤 Upload a new assignment</h2>
-      <form id="uploadForm">
-        <label>Title
-          <input type="text" id="title" placeholder="e.g. Algebra Worksheet 3" required>
-        </label>
-        <div class="row">
-          <label>Form/Grade <select id="aForm" required></select></label>
-          <label>Stream <select id="aStream" required></select></label>
-          <label>Subject <select id="aSubject" required></select></label>
-        </div>
-        <label>Instructions (optional)
-          <textarea id="desc" rows="2"></textarea>
-        </label>
-        <label>Assignment file (PDF or Word)
-          <input type="file" id="aFile" accept=".pdf,.doc,.docx" required>
-        </label>
-        <button type="submit" id="uploadBtn">Upload Assignment</button>
-        <p id="uploadStatus"></p>
-      </form>
-    </section>
+<header>
 
-    <!-- VIEW SUBMISSIONS -->
-    <section class="card">
-      <h2>📥 Student submissions</h2>
-      <div class="row">
-        <select id="fSubject"></select>
-        <select id="fForm"></select>
-        <button onclick="loadSubmissions()">Filter</button>
-      </div>
-      <div id="submissionList"><p class="muted">Press Filter to load submissions.</p></div>
-    </section>
-  </main>
 
-  <script src="config.js"></script>
-  <script src="teacher.js"></script>
+<div>
+
+<h1>👩‍🏫 Teacher Dashboard</h1>
+
+<p>Nkuene Girls Student Assignments Portal</p>
+
+</div>
+
+
+
+<a href="index.html">
+← Student Portal
+</a>
+
+
+</header>
+
+
+
+
+
+<!-- TEACHER LOGIN -->
+
+
+<div id="loginBox" class="card narrow">
+
+
+<h2>
+🔐 Teacher Access
+</h2>
+
+
+<p class="muted">
+Enter your teacher password to continue.
+</p>
+
+
+
+<input 
+type="password"
+id="pwd"
+placeholder="Enter password">
+
+
+
+<button onclick="checkPassword">
+
+Login
+
+</button>
+
+
+
+<p id="pwdMsg" class="error"></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<main id="dashboard" style="display:none">
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+📤 Upload New Assignment
+</h2>
+
+
+<p class="muted">
+Share learning materials with your students.
+</p>
+
+
+
+
+<form id="uploadForm">
+
+
+
+
+
+<label>
+
+Assignment Title
+
+<input 
+type="text"
+id="title"
+placeholder="Example: Biology CAT Revision"
+required>
+
+</label>
+
+
+
+
+
+
+
+<div class="row">
+
+
+
+<label>
+
+Form / Grade
+
+<select id="aForm" required></select>
+
+</label>
+
+
+
+
+<label>
+
+Stream
+
+<select id="aStream" required></select>
+
+</label>
+
+
+
+
+<label>
+
+Subject
+
+<select id="aSubject" required></select>
+
+</label>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<label>
+
+Instructions
+
+<textarea 
+id="desc"
+rows="4"
+placeholder="Enter assignment instructions...">
+
+</textarea>
+
+</label>
+
+
+
+
+
+
+
+
+<label>
+
+Upload Assignment File
+
+<input 
+type="file"
+id="aFile"
+accept=".pdf,.doc,.docx"
+required>
+
+</label>
+
+
+
+
+
+
+
+<button 
+type="submit"
+id="uploadBtn">
+
+📤 Upload Assignment
+
+</button>
+
+
+
+
+<p id="uploadStatus"></p>
+
+
+
+
+</form>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+📥 Student Submissions
+</h2>
+
+
+
+<p class="muted">
+View assignments submitted by students.
+</p>
+
+
+
+
+
+<div class="row">
+
+
+<select id="fSubject"></select>
+
+
+<select id="fForm"></select>
+
+
+
+<button onclick="loadSubmissions()">
+
+🔎 Filter
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div id="submissionList">
+
+
+<p class="muted">
+
+Press Filter to load submissions.
+
+</p>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+
+<h3>
+Nkuene Girls Student Assignments Portal
+</h3>
+
+
+<p>
+<em>
+"Rising towards excellence"
+</em>
+</p>
+
+
+<p>
+Developed by:
+<strong>
+Peter Munjalu (Tcher Ptah)
+</strong>
+</p>
+
+
+<p>
+📞 0741227088
+</p>
+
+
+
+<p>
+© 2026 Nkuene Girls. All Rights Reserved.
+</p>
+
+
+</footer>
+
+
+
+
+
+
+
+<script src="config.js"></script>
+
+<script src="teacher.js"></script>
+
+
 </body>
+
 </html>
