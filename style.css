@@ -504,3 +504,48 @@ input[type="file"] {
  animation:fadeIn .4s ease;
 
 }
+
+.footer {
+
+background:#1a73e8;
+
+color:white;
+
+text-align:center;
+
+padding:25px 15px;
+
+margin-top:40px;
+
+}
+
+
+.footer h3 {
+
+color:white;
+
+margin-bottom:10px;
+
+}
+
+
+.footer p {
+
+margin:6px 0;
+
+font-size:.95rem;
+
+}
+
+
+@media(max-width:700px){
+
+.footer {
+
+padding:20px 10px;
+
+font-size:.9rem;
+
+}
+
+}
