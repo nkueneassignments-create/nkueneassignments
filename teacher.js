@@ -1,5 +1,4 @@
 fillSelect(document.getElementById("aForm"), FORMS, "Select Form");
-fillSelect(document.getElementById("aStream"), STREAMS, "Select Stream");
 fillSelect(document.getElementById("aSubject"), SUBJECTS, "Select Subject");
 fillSelect(document.getElementById("fSubject"), SUBJECTS, "All Subjects");
 fillSelect(document.getElementById("fForm"), FORMS, "All Forms");
@@ -31,14 +30,15 @@ document.getElementById("uploadForm").addEventListener("submit", async (e) => {
     const { data: urlData } = sb.storage.from("assignments").getPublicUrl(path);
 
     const { error: dbErr } = await sb.from("assignments").insert({
-      title: document.getElementById("title").value.trim(),
-      form: document.getElementById("aForm").value,
-      stream: document.getElementById("aStream").value,
-      subject: document.getElementById("aSubject").value,
-      description: document.getElementById("desc").value.trim(),
-      file_url: urlData.publicUrl,
-      file_name: file.name
-    });
+  title: document.getElementById("title").value.trim(),
+  form: document.getElementById("aForm").value,
+  subject: document.getElementById("aSubject").value,
+  term: document.getElementById("aTerm").value,
+  year: document.getElementById("aYear").value,
+  description: document.getElementById("desc").value.trim(),
+  file_url: urlData.publicUrl,
+  file_name: file.name
+});
     if (dbErr) throw dbErr;
 
     status.textContent = "✅ Assignment posted!";
