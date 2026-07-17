@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nkuene Girls Student Assignments Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header>
+    <h1>📚 Assignments Portal</h1>
+    <a href="teacher.html">Teacher Login →</a>
+  </header>
+
+  <main>
+    <!-- VIEW ASSIGNMENTS -->
+    <section class="card">
+      <h2>1️⃣ Find your assignment</h2>
+      <div class="row">
+        <select id="filterForm"></select>
+        <select id="filterStream"></select>
+        <select id="filterSubject"></select>
+        <button onclick="loadAssignments()">Search</button>
+      </div>
+      <div id="assignmentList"><p class="muted">Select your class and press Search.</p></div>
+    </section>
+
+    <!-- SUBMIT WORK -->
+    <section class="card">
+      <h2>2️⃣ Submit your work</h2>
+      <form id="submitForm">
+        <label>Assignment
+          <select id="subAssignment" required></select>
+        </label>
+        <div class="row">
+          <label>Full Name
+            <input type="text" id="studentName" placeholder="e.g. Jane Wanjiku" required>
+          </label>
+          <label>Admission Number
+            <input type="text" id="admNumber" placeholder="e.g. 10234" required>
+          </label>
+        </div>
+        <div class="row">
+          <label>Form/Grade <select id="subForm" required></select></label>
+          <label>Stream <select id="subStream" required></select></label>
+          <label>Subject <select id="subSubject" required></select></label>
+        </div>
+        <label>Your file (PDF, Word document, or image)
+          <input type="file" id="subFile"
+                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+        </label>
+        <button type="submit" id="submitBtn">📤 Submit Work</button>
+        <p id="submitStatus"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

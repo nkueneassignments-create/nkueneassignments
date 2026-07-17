@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header>
+    <h1>👩‍🏫 Teacher Dashboard</h1>
+    <a href="index.html">← Student Page</a>
+  </header>
+
+  <!-- PASSWORD GATE -->
+  <div id="loginBox" class="card narrow">
+    <h2>Enter teacher password</h2>
+    <input type="password" id="pwd" placeholder="Password">
+    <button onclick="checkPassword()">Login</button>
+    <p id="pwdMsg" class="error"></p>
+  </div>
+
+  <main id="dashboard" style="display:none">
+    <!-- UPLOAD ASSIGNMENT -->
+    <section class="card">
+      <h2>📤 Upload a new assignment</h2>
+      <form id="uploadForm">
+        <label>Title
+          <input type="text" id="title" placeholder="e.g. Algebra Worksheet 3" required>
+        </label>
+        <div class="row">
+          <label>Form/Grade <select id="aForm" required></select></label>
+          <label>Stream <select id="aStream" required></select></label>
+          <label>Subject <select id="aSubject" required></select></label>
+        </div>
+        <label>Instructions (optional)
+          <textarea id="desc" rows="2"></textarea>
+        </label>
+        <label>Assignment file (PDF or Word)
+          <input type="file" id="aFile" accept=".pdf,.doc,.docx" required>
+        </label>
+        <button type="submit" id="uploadBtn">Upload Assignment</button>
+        <p id="uploadStatus"></p>
+      </form>
+    </section>
+
+    <!-- VIEW SUBMISSIONS -->
+    <section class="card">
+      <h2>📥 Student submissions</h2>
+      <div class="row">
+        <select id="fSubject"></select>
+        <select id="fForm"></select>
+        <button onclick="loadSubmissions()">Filter</button>
+      </div>
+      <div id="submissionList"><p class="muted">Press Filter to load submissions.</p></div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="teacher.js"></script>
+</body>
+</html>
