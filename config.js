@@ -1,5 +1,5 @@
 // ===== EDIT THESE 3 LINES =====
-const SUPABASE_URL = "https://wircuusdfqnmrewfjagb.supabase.co/rest/v1/";   // from Step 1
+const SUPABASE_URL = "https://wircuusdfqnmrewfjagb.supabase.co";   // from Step 1
 const SUPABASE_ANON_KEY = "sb_publishable_Oq4fBe_5aojVD2IfnYAn-A_ZLdc0tAi";                 // from Step 1
 const TEACHER_PASSWORD = "nkuene2026";                    // pick your own
 
