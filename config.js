@@ -36,7 +36,7 @@ const STREAMS = [
 "10H"
 ];
 const SUBJECTS = ["Mathematics", "English", "Kiswahili", "Biology",
-  "Chemistry", "Physics", "History", "Geography", "CRE",
+  "Chemistry", "Physics", "History", "Geography", "CRE", "Home Science",
   "Business Studies", "Agriculture", "Computer Studies", "French", "German", "CSL", "ICT"];
 
 // ===== Don't touch below this line =====
