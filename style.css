@@ -549,3 +549,32 @@ font-size:.9rem;
 }
 
 }
+/* Learner Communication Centre */
+
+.communication {
+    border-left: 6px solid #1a73e8;
+}
+
+
+.notice {
+    background: #f8f9fa;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 12px;
+}
+
+
+.notice h3 {
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+
+.notice p {
+    line-height: 1.6;
+}
+
+
+.notice strong {
+    font-weight: bold;
+}
