@@ -16,7 +16,7 @@ async function loadAssignments() {
 
   let query = sb.from("assignments").select("*").order("created_at", { ascending: false });
   if (form) query = query.eq("form", form);
- 
+  if (stream) query = query.eq("stream", stream);
   if (subject) query = query.eq("subject", subject);
 
   const { data, error } = await query;
