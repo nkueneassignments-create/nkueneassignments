@@ -16,37 +16,90 @@ function checkPassword() {
 // ---------- Upload assignment ----------
 document.getElementById("uploadForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const btn = document.getElementById("uploadBtn");
   const status = document.getElementById("uploadStatus");
+
   btn.disabled = true;
-  status.textContent = "Uploading... ⏳";
+  status.textContent = "Posting assignment... ⏳";
 
   try {
-    const file = document.getElementById("aFile").files[0];
-    const ext = file.name.split(".").pop();
-    const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-    const { error: upErr } = await sb.storage.from("assignments").upload(path, file);
-    if (upErr) throw upErr;
-    const { data: urlData } = sb.storage.from("assignments").getPublicUrl(path);
 
-    const { error: dbErr } = await sb.from("assignments").insert({
-  title: document.getElementById("title").value.trim(),
-  form: document.getElementById("aForm").value,
-  subject: document.getElementById("aSubject").value,
-  term: document.getElementById("aTerm").value,
-  year: document.getElementById("aYear").value,
-  description: document.getElementById("desc").value.trim(),
-  file_url: urlData.publicUrl,
-  file_name: file.name
-});
+    let fileUrl = null;
+    let fileName = null;
+
+    const file = document.getElementById("aFile").files[0];
+
+
+    // Upload file only if teacher attached one
+    if (file) {
+
+      const ext = file.name.split(".").pop();
+
+      const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+
+
+      const { error: upErr } = await sb.storage
+        .from("assignments")
+        .upload(path, file);
+
+
+      if (upErr) throw upErr;
+
+
+      const { data: urlData } = sb.storage
+        .from("assignments")
+        .getPublicUrl(path);
+
+
+      fileUrl = urlData.publicUrl;
+      fileName = file.name;
+
+    }
+
+
+
+    // Save assignment details
+    const { error: dbErr } = await sb
+      .from("assignments")
+      .insert({
+
+        title: document.getElementById("title").value.trim(),
+
+        form: document.getElementById("aForm").value,
+
+        subject: document.getElementById("aSubject").value,
+
+        term: document.getElementById("aTerm").value,
+
+        year: document.getElementById("aYear").value,
+
+        description: document.getElementById("desc").value.trim(),
+
+        file_url: fileUrl,
+
+        file_name: fileName
+
+      });
+
+
     if (dbErr) throw dbErr;
 
+
     status.textContent = "✅ Assignment posted!";
+
     document.getElementById("uploadForm").reset();
+
+
   } catch (err) {
+
     status.textContent = "❌ " + err.message;
+
   }
+
+
   btn.disabled = false;
+
 });
 
 // ---------- Load submissions ----------
