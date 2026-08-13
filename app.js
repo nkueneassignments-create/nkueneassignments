@@ -2,7 +2,10 @@
 fillSelect(document.getElementById("filterForm"), FORMS, "Form/Grade");
 
 fillSelect(document.getElementById("filterSubject"), SUBJECTS, "Subject");
+
+
 fillSelect(document.getElementById("subForm"), FORMS, "Select Form");
+fillSelect(document.getElementById("subStream"), STREAMS, "Select Stream");
 fillSelect(document.getElementById("subSubject"), SUBJECTS, "Select Subject");
 
 let currentAssignments = [];
