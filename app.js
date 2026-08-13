@@ -10,40 +10,122 @@ let currentAssignments = [];
 
 // ---------- Load assignments ----------
 async function loadAssignments() {
+
   const form = document.getElementById("filterForm").value;
-  const stream = document.getElementById("filterStream").value;
   const subject = document.getElementById("filterSubject").value;
 
-  let query = sb.from("assignments").select("*").order("created_at", { ascending: false });
-  if (form) query = query.eq("form", form);
 
-  if (subject) query = query.eq("subject", subject);
+  let query = sb
+    .from("assignments")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-  const { data, error } = await query;
-  const list = document.getElementById("assignmentList");
 
-  if (error) { list.innerHTML = "<p class='error'>Error loading assignments.</p>"; return; }
-  currentAssignments = data;
-
-  if (data.length === 0) {
-    list.innerHTML = "<p class='muted'>No assignments found for that selection.</p>";
-  } else {
-    list.innerHTML = data.map(a => `
-      <div class="item">
-        <div>
-          <strong>${a.title}</strong><br>
-          <span class="muted">${a.subject} • ${a.form} ${a.stream} •
-          ${new Date(a.created_at).toLocaleDateString()}</span>
-          ${a.description ? `<p>${a.description}</p>` : ""}
-        </div>
-        <a class="btn" href="${a.file_url}" target="_blank">⬇ Download</a>
-      </div>`).join("");
+  // Filter ONLY by Form and Subject
+  if (form) {
+    query = query.eq("form", form);
   }
 
-  // Also fill the "which assignment are you submitting?" dropdown
+
+  if (subject) {
+    query = query.eq("subject", subject);
+  }
+
+
+
+  const { data, error } = await query;
+
+
+  const list = document.getElementById("assignmentList");
+
+
+  if (error) {
+
+    list.innerHTML = "<p class='error'>Error loading assignments.</p>";
+
+    return;
+
+  }
+
+
+
+  currentAssignments = data;
+
+
+
+  if (data.length === 0) {
+
+    list.innerHTML =
+    "<p class='muted'>No assignments found for that selection.</p>";
+
+  } 
+  
+  else {
+
+
+    list.innerHTML = data.map(a => `
+
+      <div class="item">
+
+        <div>
+
+          <strong>${a.title}</strong><br>
+
+
+          <span class="muted">
+          ${a.subject} • ${a.form}
+          • ${new Date(a.created_at).toLocaleDateString()}
+          </span>
+
+
+          ${a.description ? `<p>${a.description}</p>` : ""}
+
+
+        </div>
+
+
+
+        ${
+          a.file_url 
+          ?
+          `<a class="btn" href="${a.file_url}" download="${a.file_name || 'assignment'}">
+          ⬇ Download
+          </a>`
+          :
+          `<span class="muted">
+          No file attached
+          </span>`
+        }
+
+
+
+      </div>
+
+
+    `).join("");
+
+  }
+
+
+
+
+  // Fill assignment dropdown for submissions
+
   document.getElementById("subAssignment").innerHTML =
-    `<option value="">Select assignment</option>` +
-    data.map(a => `<option value="${a.id}">${a.title} (${a.subject})</option>`).join("");
+
+  `<option value="">
+  Select assignment (optional)
+  </option>` +
+
+
+  data.map(a =>
+
+  `<option value="${a.id}">
+  ${a.title} (${a.subject})
+  </option>`
+
+  ).join("");
+
 }
 
 // ---------- Submit student work ----------
