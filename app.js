@@ -1,6 +1,6 @@
 // Fill the dropdowns
 fillSelect(document.getElementById("filterForm"), FORMS, "Form/Grade");
-fillSelect(document.getElementById("filterStream"), STREAMS, "Stream");
+
 fillSelect(document.getElementById("filterSubject"), SUBJECTS, "Subject");
 fillSelect(document.getElementById("subForm"), FORMS, "Select Form");
 fillSelect(document.getElementById("subStream"), STREAMS, "Select Stream");
@@ -16,7 +16,7 @@ async function loadAssignments() {
 
   let query = sb.from("assignments").select("*").order("created_at", { ascending: false });
   if (form) query = query.eq("form", form);
-  if (stream) query = query.eq("stream", stream);
+
   if (subject) query = query.eq("subject", subject);
 
   const { data, error } = await query;
