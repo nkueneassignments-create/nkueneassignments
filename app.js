@@ -3,7 +3,6 @@ fillSelect(document.getElementById("filterForm"), FORMS, "Form/Grade");
 
 fillSelect(document.getElementById("filterSubject"), SUBJECTS, "Subject");
 fillSelect(document.getElementById("subForm"), FORMS, "Select Form");
-fillSelect(document.getElementById("subStream"), STREAMS, "Select Stream");
 fillSelect(document.getElementById("subSubject"), SUBJECTS, "Select Subject");
 
 let currentAssignments = [];
@@ -111,20 +110,8 @@ async function loadAssignments() {
 
   // Fill assignment dropdown for submissions
 
-  document.getElementById("subAssignment").innerHTML =
-
-  `<option value="">
-  Select assignment (optional)
-  </option>` +
-
-
-  data.map(a =>
-
-  `<option value="${a.id}">
-  ${a.title} (${a.subject})
-  </option>`
-
-  ).join("");
+ // Keep assignment ID empty because learner selects no assignment manually
+document.getElementById("subAssignment").value = "";
 
 }
 
@@ -137,9 +124,15 @@ document.getElementById("submitForm").addEventListener("submit", async (e) => {
   status.textContent = "Uploading... please wait ⏳";
 
   try {
-    const file = document.getElementById("subFile").files[0];
-    if (file.size > 50 * 1024 * 1024) throw new Error("File is too big (max 50 MB).");
+   const file = document.getElementById("subFile").files[0];
 
+if (!file) {
+  throw new Error("Please attach your completed work before submitting.");
+}
+
+if (file.size > 50 * 1024 * 1024) {
+  throw new Error("File is too big (max 50 MB).");
+}
     // 1. Upload the file to storage
     const ext = file.name.split(".").pop();
     const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
